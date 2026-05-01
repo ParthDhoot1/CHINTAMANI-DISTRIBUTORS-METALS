@@ -167,8 +167,8 @@ header.scrolled {
 }
 
 .logo {
-    font-weight: 600;
-    font-size: 1.3rem;
+    font-weight: 800;
+    font-size: 1.6rem;
     color: var(--primary);
     text-decoration: none;
     letter-spacing: 1px;
@@ -185,7 +185,7 @@ header.scrolled {
 }
 
 .logo span {
-    font-weight: 300;
+    font-weight: 500;
     color: var(--secondary);
 }
 
@@ -641,8 +641,8 @@ footer {
     header { height: 74px; display: block; }
     .nav-container { padding: 0 16px; width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; }
     .logo-img { height: 44px; width: auto; }
-    .logo { font-size: 1rem; gap: 6px; }
-    .logo span { font-size: 0.9rem; }
+    .logo { font-size: 1.25rem; gap: 6px; }
+    .logo span { font-size: 1.1rem; }
 
     /* Hamburger Menu */
     .hamburger { display: flex; }
@@ -770,7 +770,7 @@ footer {
     .hero-content h1 { font-size: 1.8rem; }
     .hero { min-height: 55vh; padding: 50px 14px; }
     .logo-img { height: 42px; }
-    .logo { font-size: 1rem; }
+    .logo { font-size: 1.15rem; }
     .section-header h2, .about-text h2 { font-size: 1.7rem; }
     .btn { padding: 12px 24px; font-size: 0.75rem; }
     .category-header { flex-direction: column; align-items: flex-start; gap: 10px; }
