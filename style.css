@@ -18,13 +18,14 @@ body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     overflow-x: hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-weight: 300;
+    text-rendering: optimizeLegibility;
 }
 
 /* --- TYPOGRAPHY UPGRADE --- */
 h1, h2, h3 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-weight: 700;
 }
 
@@ -63,7 +64,7 @@ h1, h2, h3 {
     font-size: 0.75rem;
     display: block;
     margin-bottom: 15px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 /* --- BUTTONS --- */
@@ -79,7 +80,7 @@ h1, h2, h3 {
     text-transform: uppercase;
     font-size: 0.8rem;
     letter-spacing: 1.5px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .btn-primary {
@@ -345,7 +346,7 @@ nav ul li a.active-link {
 }
 
 .about-text h2 span {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-style: italic;
     font-weight: 400;
 }
@@ -498,7 +499,7 @@ nav ul li a.active-link {
     font-weight: 500;
     line-height: 1.4;
     letter-spacing: 0.5px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 /* --- CONTACT STYLES --- */
@@ -548,7 +549,7 @@ nav ul li a.active-link {
     padding: 14px;
     border: 1px solid #EAE9E2;
     border-radius: 2px;
-    font-family: 'Montserrat', sans-serif;
+font-family: "Segoe UI", Arial, sans-serif;
     font-size: 0.85rem;
     transition: var(--transition);
     background: #FBFBFA;
@@ -594,7 +595,7 @@ footer {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--secondary);
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .footer-links a {
@@ -834,14 +835,14 @@ footer {
 }
 
 #modal-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 28px;
     color: #1a1a1a;
     margin-bottom: 15px;
 }
 
 #modal-text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     font-size: 15px;
     color: #666;
     line-height: 1.6;
