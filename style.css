@@ -1,4 +1,4 @@
-:root {
+ :root {
     --primary: #0C3326; /* Deeper Emerald Green for luxury contrast */
     --secondary: #BFA15F; /* Refined Gold rather than bright gold */
     --bg-light: #FBFBFA; /* Warm off-white instead of cold grey-white */
@@ -758,6 +758,21 @@ footer {
     footer { padding: 50px 0 20px; }
     .footer-brand p { max-width: 100%; }
 
+    /* Floating action buttons always visible on mobile */
+    .floating-buttons {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        bottom: 18px;
+        right: 16px;
+        z-index: 9999;
+    }
+
+    .float-btn {
+        width: 54px;
+        height: 54px;
+    }
+
     /* Modal */
     .modal-content { padding: 28px 20px; width: 92%; }
     #modal-title { font-size: 22px; }
@@ -777,6 +792,7 @@ footer {
     .category-header { flex-direction: column; align-items: flex-start; gap: 10px; }
     .contact-details { gap: 12px; }
     .top-bar { display: none; } /* Hide top bar on very small screens for cleaner UX */
+    .floating-buttons { bottom: 16px; right: 14px; }
 }
 
 /* Product Modal Styles */
@@ -998,53 +1014,4 @@ footer {
 
 .float-btn--whatsapp {
     background: #25D366;
-    animation: pulse-whatsapp 2s infinite;
-}
-
-@keyframes pulse-whatsapp {
-    0% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
-    }
-    70% {
-        box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-    }
-}
-
-@media (max-width: 768px) {
-    .floating-buttons {
-        bottom: 18px;
-        right: 18px;
-    }
-
-    .float-btn {
-        width: 50px;
-        height: 50px;
-    }
-}
-
-
-/* --- SCROLL REVEAL ANIMATIONS --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- SMOOTH SCROLL --- */
-html {
-    scroll-behavior: smooth;
-}
-
-/* --- FORM SUCCESS STATE --- */
-#formSubmitBtn:disabled {
-    cursor: not-allowed;
-    opacity: 0.9;
 }
