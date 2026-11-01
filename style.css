@@ -911,6 +911,41 @@ footer {
     font-weight: 400;
 }
 
+.detail-item--contact-actions {
+    align-items: flex-start;
+}
+
+.contact-action-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.contact-mini-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #0C3326;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: var(--transition);
+}
+
+.contact-mini-link:hover {
+    transform: translateY(-1px);
+}
+
+.contact-mini-link--whatsapp {
+    background: #25D366;
+    color: #fff;
+}
+
 .detail-icon {
     display: flex;
     align-items: center;
