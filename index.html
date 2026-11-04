@@ -371,6 +371,13 @@
                         <input type="email" id="formEmail" placeholder="Email Address" required>
                     </div>
                     <div class="form-group">
+                        <select id="formRecipient" required>
+                            <option value="" disabled selected>Select contact person</option>
+                            <option value="prasad">Mr. Prasad Dhoot</option>
+                            <option value="roland">Roland S. Karkada</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <select id="formProduct" required>
                             <option value="" disabled selected>Select Product</option>
                             <option value="Copper Scrap">Copper Scrap</option>
@@ -392,6 +399,42 @@
                         Send via WhatsApp
                     </button>
                 </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="database-section" style="padding: 80px 0 40px; background: rgba(12, 51, 38, 0.02);">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 30px; text-align: center;">
+                <span class="subtitle">Inquiry Log</span>
+                <h2>All Enquiries Database</h2>
+                <p>Every inquiry submitted from this form is stored here for follow-up and tracking.</p>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 18px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-secondary" id="exportEnquiriesBtn" style="padding: 12px 20px;">Export JSON</button>
+                <button type="button" class="btn btn-primary" id="clearEnquiriesBtn" style="padding: 12px 20px; background: #6b2b2b; border-color: #6b2b2b;">Clear Database</button>
+            </div>
+
+            <div style="overflow-x: auto; background: #fff; border: 1px solid rgba(12, 51, 38, 0.08); border-radius: 16px; box-shadow: 0 12px 28px rgba(12, 51, 38, 0.06);">
+                <table style="width: 100%; border-collapse: collapse; min-width: 1050px;">
+                    <thead style="background: #0c3326; color: #fff;">
+                        <tr>
+                            <th style="padding: 14px 12px; text-align: left;">Date & Time</th>
+                            <th style="padding: 14px 12px; text-align: left;">Name</th>
+                            <th style="padding: 14px 12px; text-align: left;">Phone</th>
+                            <th style="padding: 14px 12px; text-align: left;">Email</th>
+                            <th style="padding: 14px 12px; text-align: left;">Contact Person</th>
+                            <th style="padding: 14px 12px; text-align: left;">Product</th>
+                            <th style="padding: 14px 12px; text-align: left;">Message</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inquiryTableBody" style="font-size: 0.95rem;">
+                        <tr>
+                            <td colspan="7" style="padding: 18px; text-align: center; color: #6b7280;">No enquiries saved yet.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>

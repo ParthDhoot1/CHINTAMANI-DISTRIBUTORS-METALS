@@ -1,5 +1,83 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const STORAGE_KEY = 'chintamani_inquiries';
+    const recipientMap = {
+        prasad: { name: 'Mr. Prasad Dhoot', number: '919890622331' },
+        roland: { name: 'Roland S. Karkada', number: '917045000500' }
+    };
+
+    function getStoredEnquiries() {
+        try {
+            const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            return Array.isArray(saved) ? saved : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function saveStoredEnquiries(enquiries) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(enquiries));
+    }
+
+    function escapeHtml(value = '') {
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function renderEnquiries() {
+        const tbody = document.getElementById('inquiryTableBody');
+        if (!tbody) return;
+
+        const enquiries = getStoredEnquiries();
+
+        if (!enquiries.length) {
+            tbody.innerHTML = '<tr><td colspan="7" style="padding: 18px; text-align: center; color: #6b7280;">No enquiries saved yet.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = enquiries.map((entry) => {
+            const timestamp = entry.timestamp ? new Date(entry.timestamp).toLocaleString() : 'N/A';
+            const message = entry.message || 'No message provided';
+
+            return `
+                <tr style="border-top: 1px solid rgba(12, 51, 38, 0.08);">
+                    <td style="padding: 14px 12px; vertical-align: top;">${escapeHtml(timestamp)}</td>
+                    <td style="padding: 14px 12px; vertical-align: top;">${escapeHtml(entry.name || 'N/A')}</td>
+                    <td style="padding: 14px 12px; vertical-align: top;">${escapeHtml(entry.phone || 'N/A')}</td>
+                    <td style="padding: 14px 12px; vertical-align: top;">${escapeHtml(entry.email || 'N/A')}</td>
+                    <td style="padding: 14px 12px; vertical-align: top;">${escapeHtml(entry.recipientName || 'N/A')}</td>
+                    <td style="padding: 14px 12px; vertical-align: top;">${escapeHtml(entry.product || 'N/A')}</td>
+                    <td style="padding: 14px 12px; vertical-align: top; white-space: pre-wrap;">${escapeHtml(message)}</td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function exportEnquiries() {
+        const enquiries = getStoredEnquiries();
+        const blob = new Blob([JSON.stringify(enquiries, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'chintamani-enquiries.json';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+    }
+
+    function clearEnquiries() {
+        const ok = window.confirm('Clear all saved enquiries from this browser database?');
+        if (!ok) return;
+
+        saveStoredEnquiries([]);
+        renderEnquiries();
+    }
+
     // ============================================================
     // 1. WHATSAPP FORM SUBMISSION
     // ============================================================
@@ -11,8 +89,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = document.getElementById('formName').value.trim();
         const phone = document.getElementById('formPhone').value.trim();
         const email = document.getElementById('formEmail').value.trim();
+        const recipient = document.getElementById('formRecipient').value;
         const product = document.getElementById('formProduct').value;
         const message = document.getElementById('formMessage').value.trim();
+
+        if (!recipient) {
+            alert('Please select a contact person before sending your inquiry.');
+            return;
+        }
+
+        const recipientInfo = recipientMap[recipient];
+        const recipientNumber = recipientInfo.number;
+
+        const enquiry = {
+            id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+            name,
+            phone,
+            email,
+            recipient,
+            recipientName: recipientInfo.name,
+            recipientNumber,
+            product,
+            message,
+            timestamp: new Date().toISOString()
+        };
+
+        const enquiries = getStoredEnquiries();
+        enquiries.unshift(enquiry);
+        saveStoredEnquiries(enquiries);
+        renderEnquiries();
 
         // Build the WhatsApp message
         const whatsappMessage =
@@ -27,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `━━━━━━━━━━━━━━━━━━━━━`;
 
         const encodedMessage = encodeURIComponent(whatsappMessage);
-        const whatsappURL = `https://wa.me/919890622331?text=${encodedMessage}`;
+        const whatsappURL = `https://wa.me/${recipientNumber}?text=${encodedMessage}`;
 
         // Open WhatsApp in a new tab
         window.open(whatsappURL, '_blank');
@@ -51,6 +156,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
+    const exportBtn = document.getElementById('exportEnquiriesBtn');
+    const clearBtn = document.getElementById('clearEnquiriesBtn');
+
+    if (exportBtn) {
+        exportBtn.addEventListener('click', exportEnquiries);
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', clearEnquiries);
+    }
+
+    renderEnquiries();
 
     // ============================================================
     // 2. PRODUCT MODAL
